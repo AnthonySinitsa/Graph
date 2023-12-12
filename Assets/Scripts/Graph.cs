@@ -5,11 +5,11 @@ public class Graph : MonoBehaviour{
     Transform pointPrefab;
 
     void Awake(){
-        int i = 0;
-        while(i < 10){
+        var scale = Vector3.one / 5f;
+        for(int i = 0; i < 10; i++){
             Transform point = Instantiate(pointPrefab);
-            point.localPosition = Vector3.right * i;
-            i++;
+            point.localPosition = Vector3.right * ((i + 0.5f) / 5f - 1f);
+            point.localScale = scale;
         }
 
     }
