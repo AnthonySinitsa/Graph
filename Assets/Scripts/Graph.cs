@@ -5,10 +5,13 @@ public class Graph : MonoBehaviour{
     Transform pointPrefab;
 
     void Awake(){
+        var position = Vector3.zero;
         var scale = Vector3.one / 5f;
         for(int i = 0; i < 10; i++){
             Transform point = Instantiate(pointPrefab);
-            point.localPosition = Vector3.right * ((i + 0.5f) / 5f - 1f);
+            position.x = (i + 0.5f) / 5f - 1f;
+            position.y = position.x * position.x;
+            point.localPosition = position;
             point.localScale = scale;
         }
 
