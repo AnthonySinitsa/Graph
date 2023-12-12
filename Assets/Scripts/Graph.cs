@@ -5,10 +5,12 @@ public class Graph : MonoBehaviour{
     Transform pointPrefab;
 
     void Awake(){
-        Transform point = Instantiate(pointPrefab);
-        point.localPosition = Vector3.right;
+        int i = 0;
+        while(i < 10){
+            Transform point = Instantiate(pointPrefab);
+            point.localPosition = Vector3.right * i;
+            i++;
+        }
 
-        point = Instantiate(pointPrefab);
-        point.localPosition = Vector3.right * 2f;
     }
 }
