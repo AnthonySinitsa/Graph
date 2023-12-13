@@ -28,7 +28,7 @@ public class Graph : MonoBehaviour{
         for (int i = 0; i < points.Length; i++){
             Transform point = points[i];
             Vector3 position = point.localPosition;
-            position.y = Mathf.Sin(Mathf.PI * (position.x + time));
+            position.y = Mathf.Sin(5 * (position.x + time));
             point.localPosition = position;
         }
     }
