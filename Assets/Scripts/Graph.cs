@@ -24,10 +24,11 @@ public class Graph : MonoBehaviour{
     }
 
     void Update() {
+        float time = Time.time;
         for (int i = 0; i < points.Length; i++){
             Transform point = points[i];
             Vector3 position = point.localPosition;
-            position.y = Mathf.Sin(Mathf.PI * (position.x + Time.time));
+            position.y = Mathf.Sin(Mathf.PI * (position.x + time));
             point.localPosition = position;
         }
     }
