@@ -67,4 +67,9 @@ public static class FunctionLibrary{
     public static FunctionName GetNextFunctionName (FunctionName name){
         return (int)name < functions.Length - 1 ? name + 1 : 0;
     }
+
+    public static FunctionName GetRandomFunctionNameOtherThan(FunctionName name){
+        var choice = (FunctionName)UnityEngine.Random.Range(1, functions.Length);
+        return choice == name ? 0 : choice;
+    }
 }
