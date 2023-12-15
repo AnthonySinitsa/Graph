@@ -63,4 +63,12 @@ public static class FunctionLibrary{
         p.z = s * Cos(PI * u);
         return p;
     }
+
+    public static FunctionName GetNextFunctionName (FunctionName name){
+        if(name < FunctionName.Torus){
+            return name + 1;
+        } else {
+            return FunctionName.Wave;
+        }
+    }
 }
