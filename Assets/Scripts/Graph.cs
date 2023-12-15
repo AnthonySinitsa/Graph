@@ -10,6 +10,11 @@ public class Graph : MonoBehaviour{
     [SerializeField]
     FunctionLibrary.FunctionName function;
 
+    public enum TransitionMode {Cycle, Random}
+
+    [SerializeField]
+    TransitionMode transitionMode;
+
     [SerializeField, Min(0f)]
     float functionDuration = 1f;
 
@@ -32,7 +37,7 @@ public class Graph : MonoBehaviour{
         duration += Time.deltaTime;
         if(duration >= functionDuration){
             duration -= functionDuration;
-            function = FunctionLibrary.GetNextFunctionName(function);
+            PickNextFunction();
         }
         UpdateFunction();
     }
@@ -51,5 +56,11 @@ public class Graph : MonoBehaviour{
             float u = (x + 0.5f) * step - 1f;
             points[i].localPosition = f(u, v, time);
         }
+    }
+
+    void PickNextFunction(){
+        function = transitionMode == TransitionMode.Cycle ?
+        FunctionLibrary.GetNextFunctionName(function) :
+        FunctionLibrary.GetRandomFunctionNameOtherThan(function);
     }
 }
