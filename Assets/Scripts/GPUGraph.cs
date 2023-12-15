@@ -20,6 +20,19 @@ public class GPUGraph : MonoBehaviour{
     bool transitioning;
     FunctionLibrary.FunctionName transitionFunction;
 
+    ComputeBuffer positionsBuffer;
+
+    // OnEnable method gets invoked each time component is enabled, happens after it awakens and after hot reload is complete.
+    void OnEnable(){
+        // We need to store 3D position vectors, which consist of three float numbers, so the element size is three times four bytes. Thus 40,000 positions would require 0.48MB or roughly 0.46MiB of GPU memory.
+        positionsBuffer = new ComputeBuffer(resolution * resolution, 3 * 4);
+    }
+
+    void OnDisable(){
+        positionsBuffer.Release();
+        positionsBuffer = null;
+    }
+
     void Update() {
         duration += Time.deltaTime;
         if(transitioning){
