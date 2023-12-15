@@ -1,0 +1,6 @@
+#pragma kernel FunctionKernel
+
+float _Step;
+
+[numthreads(8, 8, 1)]
+void FunctionKernel (uint3 id: SV_DispatchThreadID) {}
