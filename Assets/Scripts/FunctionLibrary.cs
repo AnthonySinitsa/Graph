@@ -72,4 +72,11 @@ public static class FunctionLibrary{
         var choice = (FunctionName)UnityEngine.Random.Range(1, functions.Length);
         return choice == name ? 0 : choice;
     }
+
+    public static Vector3 Morph(
+        float u, float v, float t, Function from, Function to, float progress
+    ){
+        //Lerp is short for linear interpolation, It will produce a straight constant-speed transition between the functions.
+        return Vector3.LerpUnclamped(from(u, v, t), to(u, v, t), SmoothStep(0f, 1f, progress));
+    }
 }
