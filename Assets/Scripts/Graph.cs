@@ -37,8 +37,15 @@ public class Graph : MonoBehaviour{
 
     void Update() {
         duration += Time.deltaTime;
-        if(duration >= functionDuration){
+        if(transitioning){
+            if(duration >= transitionDuration){
+                duration -= transitionDuration;
+                transitioning = false;
+            }
+        } else if(duration >= functionDuration){
             duration -= functionDuration;
+            transitioning = true;
+            transitionFunction = function;
             PickNextFunction();
         }
 
