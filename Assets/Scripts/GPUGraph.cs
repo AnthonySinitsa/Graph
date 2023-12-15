@@ -12,6 +12,12 @@ public class GPUGraph : MonoBehaviour{
     [SerializeField]
     ComputeShader computeShader;
 
+    [SerializeField]
+    Material material;
+
+    [SerializeField]
+    Mesh mesh;
+
     [SerializeField, Range(10, 200)]
     int resolution = 10;
 
