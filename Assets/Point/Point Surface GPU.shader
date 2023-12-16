@@ -6,14 +6,14 @@ Shader "Graph/Point Surface GPU" {
 	
 	SubShader {
 		CGPROGRAM
-        // below line instructs shader compiler to generate a suface shader with standard lighting and full support for shadows
-        // pragma comes from Greek and refers to an action, or something that needs to be done.
+    // below line instructs shader compiler to generate a suface shader with standard lighting and full support for shadows
+    // pragma comes from Greek and refers to an action, or something that needs to be done.
 		#pragma surface ConfigureSurface Standard fullforwardshadows addshadow
-        #pragma instancing_options assumeuniformscaling procedural:ConfigureProcedural
-        #pragma editor_sync_compilation
+    #pragma instancing_options assumeuniformscaling procedural:ConfigureProcedural
+    #pragma editor_sync_compilation
 		#pragma target 4.5
 
-        #include "PointGPU.hlsl"
+    #include "PointGPU.hlsl"
 		
 		struct Input {
 			float3 worldPos;

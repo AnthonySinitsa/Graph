@@ -9,6 +9,8 @@ public class GPUGraph : MonoBehaviour{
         stepId = Shader.PropertyToID("_Step"),
         timeId = Shader.PropertyToID("_Time");
 
+    const int maxResolution = 1000;
+
     [SerializeField]
     ComputeShader computeShader;
 
@@ -18,7 +20,7 @@ public class GPUGraph : MonoBehaviour{
     [SerializeField]
     Mesh mesh;
 
-    [SerializeField, Range(10, 1000)]
+    [SerializeField, Range(10, maxResolution)]
     int resolution = 10;
 
     [SerializeField]
@@ -41,7 +43,7 @@ public class GPUGraph : MonoBehaviour{
     // OnEnable method gets invoked each time component is enabled, happens after it awakens and after hot reload is complete.
     void OnEnable(){
         // We need to store 3D position vectors, which consist of three float numbers, so the element size is three times four bytes. Thus 40,000 positions would require 0.48MB or roughly 0.46MiB of GPU memory.
-        positionsBuffer = new ComputeBuffer(resolution * resolution, 3 * 4);
+        positionsBuffer = new ComputeBuffer(maxResolution * maxResolution, 3 * 4);
     }
 
     void OnDisable(){
@@ -86,7 +88,7 @@ public class GPUGraph : MonoBehaviour{
         material.SetFloat(stepId, step);
         var bounds = new Bounds(Vector3.zero, Vector3.one * (2f + 2f / resolution));
         Graphics.DrawMeshInstancedProcedural(
-            mesh, 0, material, bounds, positionsBuffer.count
+            mesh, 0, material, bounds, resolution * resolution
         );
     }
 }
