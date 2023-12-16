@@ -25,7 +25,8 @@
 #pragma kernel TorusToWaveKernel
 #pragma kernel TorusToMultiWaveKernel
 #pragma kernel TorusToRippleKernel
-#pragma kernel TorusToSpher
+#pragma kernel TorusToSphereKernel
+#pragma kernel TorusKernel
 
 RWStructuredBuffer<float3> _Positions;
 
