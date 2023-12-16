@@ -20,19 +20,6 @@ void SetPosition (uint3 id, float3 position) {
     }
 }
 
-#define KERNEL_FUNCTION(function) \
-    [numthreads(8, 8, 1)] \
-    void function##Kernel (uint3 id: SV_DispatchThreadID) { \
-        float2 uv = GetUV(id); \
-        SetPosition(id, function(uv.x, uv.y, _Time)); \
-    }
-
-KERNEL_FUNCTION(Wave)
-KERNEL_FUNCTION(MultiWave)
-KERNEL_FUNCTION(Ripple)
-KERNEL_FUNCTION(Sphere)
-KERNEL_FUNCTION(Torus)
-
 #define PI 3.14159265358979323846
 
 float3 Wave(float u, float v, float t){
@@ -84,3 +71,16 @@ float3 Torus(float u, float v, float t){
     p.z = s * cos(PI * u);
     return p;
 }
+
+#define KERNEL_FUNCTION(function) \
+    [numthreads(8, 8, 1)] \
+    void function##Kernel (uint3 id: SV_DispatchThreadID) { \
+        float2 uv = GetUV(id); \
+        SetPosition(id, function(uv.x, uv.y, _Time)); \
+    }
+
+KERNEL_FUNCTION(Wave)
+KERNEL_FUNCTION(MultiWave)
+KERNEL_FUNCTION(Ripple)
+KERNEL_FUNCTION(Sphere)
+KERNEL_FUNCTION(Torus)
