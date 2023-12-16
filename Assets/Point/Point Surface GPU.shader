@@ -10,6 +10,7 @@ Shader "Graph/Point Surface GPU" {
         // pragma comes from Greek and refers to an action, or something that needs to be done.
 		#pragma surface ConfigureSurface Standard fullforwardshadows addshadow
         #pragma instancing_options assumeuniformscaling procedural:ConfigureProcedural
+        #pragma editor_sync_compilation
 		#pragma target 4.5
 		
 		struct Input {
@@ -28,9 +29,14 @@ Shader "Graph/Point Surface GPU" {
             #if defined(UNITY_PROCEDURAL_INSTANCING_ENABLED)
                 float3 position = _Positions[unity_InstanceID];
 
-                unity_ObjectToWorld = 0.0;
-                unity_ObjectToWorld.m03_m13_m23_m33 = float4(position, 1.0);
-                unity_ObjectToWorld.m00_m11_m22 = _Step;
+                unity_ObjectToWorld._m00 = _Step; // Scale x
+                unity_ObjectToWorld._m11 = _Step; // Scale y
+                unity_ObjectToWorld._m22 = _Step; // Scale z
+                unity_ObjectToWorld._m03 = position.x; // Position x
+                unity_ObjectToWorld._m13 = position.y; // Position y
+                unity_ObjectToWorld._m23 = position.z; // Position z
+                unity_ObjectToWorld._m33 = 1.0; // Homogeneous coordinate
+
             #endif
         }
 
